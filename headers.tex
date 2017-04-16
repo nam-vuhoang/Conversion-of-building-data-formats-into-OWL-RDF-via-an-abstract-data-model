@@ -1,0 +1,280 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% User-defined commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%
+% PARAGRAPH TITLE
+%
+% \newcommand{\paragraphx}[1]{\paragraph{\textnormal{\textbf{#1}\\}}}
+\newcommand{\paragraphx}[1]{\noindent{\textnormal{\textbf{#1}}}\nopagebreak{}}
+
+
+
+
+
+\usepackage{tabularx}
+\usepackage{tabulary}
+\usepackage{tabu}
+\usepackage{multirow}
+% \usepackage{booktabs} % provides \toprule, \midrule, \bottomrule for table
+
+% \usepackage{footnote}   % Add footnote for tabulars
+% \makesavenoteenv{tabular}
+% \usepackage{tablefootnote}
+
+% 
+% Table foot notes: http://tex.stackexchange.com/questions/1583/footnotes-in-tables
+% 
+\usepackage{enumitem}
+\usepackage{booktabs}
+% \usepackage{cfr-lm} % breaks texttt fonts
+\usepackage[referable]{threeparttablex}
+
+
+%
+% Fixes "Extra }, or forgotten \endgroup." error
+%
+% \usepackage{xpatch}
+% \makeatletter
+% \chardef\TPT@@@asteriskcatcode=\catcode`*
+% \catcode`*=11
+% \xpatchcmd{\threeparttable}
+%   {\TPT@hookin{tabular}}
+%   {\TPT@hookin{tabular}\TPT@hookin{tabu}}
+%   {}{}
+% \catcode`*=\TPT@@@asteriskcatcode
+% \makeatother
+
+
+%
+% Creating alphabetical table notes
+%
+\renewlist{tablenotes}{enumerate}{1}
+\makeatletter
+\setlist[tablenotes]{label=\tnote{\alph*},ref=\alph*,itemsep=\z@,topsep=\z@skip,partopsep=\z@skip,parsep=\z@,itemindent=\z@,labelindent=\tabcolsep,labelsep=.2em,leftmargin=*,align=left,before={\footnotesize}}
+\makeatother
+
+
+
+
+
+% \usepackage{geometry}
+\usepackage{color}
+% \usepackage{colortbl} % needed for coloring table, see: https://texblog.org/2011/04/19/highlight-table-rowscolumns-with-color/
+\usepackage[table]{xcolor} % needed for coloring table, see: https://en.wikibooks.org/wiki/LaTeX/Tables
+
+%
+% Fixes error when start row to be colored is ignored: http://tex.stackexchange.com/questions/297345/why-is-the-start-row-of-rowcolors-ignored-in-tabularx
+% 
+\newcounter{tblerows}
+\expandafter\let\csname c@tblerows\endcsname\rownum
+
+
+%\definecolor{name}{system}{definition}
+% \definecolor{Gray}{gray}{0.9}
+% \definecolor{LightCyan}{rgb}{0.88,1,1}
+
+
+
+
+
+
+\setlength{\paperheight}{297mm} % needed for package {hyperref}
+
+%\usepackage{hyperref}
+\usepackage[draft]{hyperref} % defined as 'draft' to avoid error message http://tex.stackexchange.com/questions/1522/pdfendlink-ended-up-in-different-nesting-level-than-pdfstartlink
+
+
+%
+% Add paragraph symbol to section: https://tex.stackexchange.com/questions/127623/add-paragraph-symbol-to-section
+%
+\renewcommand{\sectionautorefname}{\S}
+
+\usepackage{url}
+
+
+%
+% TABULARS
+%
+
+% This command is to add new lines in tables
+% See manual: http://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+
+
+%
+% LISTINGS
+%
+
+\usepackage{listings} % see manual: ftp://ftp.funet.fi/pub/TeX/CTAN/macros/latex/contrib/listings/listings.pdf
+
+%
+% Change caption font size: http://tex.stackexchange.com/questions/129291/change-caption-style-of-listings-package-without-caption-package
+%
+\usepackage[font=bf,skip=\baselineskip]{caption}
+\captionsetup[lstlisting]{font={footnotesize,sf}}
+
+% language Ruby is used to enable comment lines started with hash character
+
+\lstset{language=Ruby,
+    aboveskip=6pt,
+    belowskip=6pt,
+    backgroundcolor=\color[gray]{0.88},
+    numberstyle=\scriptsize,
+    basicstyle=\linespread{0.9}\ttfamily\scriptsize,
+    % aboveskip={-4ex},
+    numbers=left,
+    stepnumber=1,
+    frame=none,
+    breaklines=true,
+    breakautoindent=true,
+    captionpos=t,                           % sets the caption-position to top
+    tabsize=2,                              % tab size in blank spaces
+}
+
+% \lstset{
+%   frame=top,
+%   frame=bottom,
+%   basicstyle=\linespread{0.9}\ttfamily\scriptsize,    % the size of the fonts that are used for the code
+%   backgroundcolor=\color[gray]{0.3},
+%   stepnumber=1,                           % the step between two line-numbers. If it is 1 each line will be numbered
+%   numbersep=10pt,                         % how far the line-numbers are from the code
+%   tabsize=2,                              % tab size in blank spaces
+%   extendedchars=true,                     %
+%   breaklines=true,                        % sets automatic line breaking
+%   captionpos=t,                           % sets the caption-position to top
+%   mathescape=true,
+%   stringstyle=\color{white}\ttfamily, % Farbe der String
+%   showspaces=false,           % Leerzeichen anzeigen ?
+%   showtabs=false,             % Tabs anzeigen ?
+%   xleftmargin=17pt,
+%   framexleftmargin=17pt,
+%   framexrightmargin=17pt,
+%   framexbottommargin=5pt,
+%   framextopmargin=5pt,
+%   showstringspaces=false      % Leerzeichen in Strings anzeigen ?
+%  }
+
+\AtBeginDocument{%
+  \renewcommand{\thelstlisting}{\arabic{lstlisting}}
+ }
+
+%\spnewtheorem{principle}{Principle}{\bfseries}{\rmfamily}
+
+% \AtBeginDocument{
+%     \newtheoremstyle{principleStyle}
+%         {1.5\topsep} % Space above, default \topsep
+%         {0.5\topsep} % Space below, default \topsep
+%         {\itshape} % Body font
+%         {} % Indent amount, example: \parindent
+%         {\bfseries\itshape} % Theorem head font
+%         {.} % Punctuation after theorem head
+%         {.5em} % Space after theorem head
+%         {} % Theorem head spec (can be left empty, meaning `normal')
+        
+%     \theoremstyle{principleStyle} \newtheorem{principle}{Principle}
+% }
+
+
+
+
+% Commands for C#, C++
+% Source: https://www.johndcook.com/blog/2011/10/18/typesetting-c-in-latex/
+\newcommand{\CPP}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +}}
+\newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\scriptsize\bf \#}}
+
+
+
+
+
+
+%
+% Landscape table
+%
+% \usepackage{pdflscape}
+% \usepackage{blindtext}
+
+\usepackage{pdflscape}
+\usepackage{afterpage}
+
+%
+% Alternative solution: Using sidewaystable: https://tex.stackexchange.com/questions/19017/how-to-place-a-table-on-a-new-page-with-landscape-orientation-without-clearing-t
+%
+\usepackage{rotating}
+
+%
+% Check and cross symbols: https://tex.stackexchange.com/questions/202732/checkmark-with-cross
+%
+\usepackage{pifont}
+
+% tilde symbol: https://tex.stackexchange.com/questions/9363/how-does-one-insert-a-backslash-or-a-tilde-into-latex
+\usepackage{textcomp}
+
+\newcommand{\yes}{\ding{51}} % alternative: \ding{52}
+\newcommand{\no}{\ding{55}} % alternative: \ding{56}
+\newcommand{\yesno}{$\sim$} % alternative: \ding{56}
+
+\newcommand{\sub}[1]{\textsubscript{#1}}
+
+
+
+
+
+% %\usepackage{linegoal}
+
+% % \newcommand{\definition}[1]{\textbf{#1}}
+% %\newcommand{\name}[1]{\emph{#1}}
+
+% % programming language names
+% \newcommand{\name}[1]{\textsf{\footnotesize{}#1}}
+
+% % highlight texts
+% %\newcommand{\highlight}[1]{\colorbox{yellow}{\parbox[t]{\linegoal}{#1}}}
+% \newcommand{\highlight}[1]{\colorbox{yellow}{\parbox[t]{\hsize}{#1}}}
+
+
+% % TODO text
+% % \newcommand{\TODO}[1]{\highlight{\textbf{TODO: }{#1}}}
+% \newcommand{\TODO}[1]{{}}
+
+% %\newcommand{\REVIEW}[1]{\textit{#1}}
+
+% % ifcOWL layer names
+% \newcommand{\bname}[1]{\textnormal{\textbf{#1}}}
+
+% \newcommand{\simple}{\bname{Simple}}
+% \newcommand{\standard}{\bname{Standard}}
+% \newcommand{\extended}{\bname{Extended}}
+
+% \newcommand{\ifcowl}{\bname{ifc\-OWL}}
+% \newcommand{\ifcrdf}{\bname{ifc\-RDF}}
+% \newcommand{\ifcsimple}{\ifcowl{}-\simple{}}
+% \newcommand{\ifcstandard}{\ifcowl{}-\standard{}}
+% \newcommand{\ifcextended}{\ifcowl{}-\extended{}}
+
+% \newcommand{\ifcconverter}{\bname{IFC2LD}}
+% \newcommand{\ifcld}{\ifcconverter}
+
+
+%%%%%%%%%%% End of definitions
+
+\pubyear{2017}
+\volume{0}
+\firstpage{1}
+\lastpage{1}
+
+
+
+\begin{document}
+
+
+
+
+% Added to enable emphased text hyphenation
+\sloppy
+

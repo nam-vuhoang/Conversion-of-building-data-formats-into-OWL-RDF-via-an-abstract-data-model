@@ -1,0 +1,267 @@
+\subsection{Data model comparison}\label{sec:data-model-comparison}
+
+All data models discussed in \autoref{sec:state-of-the-art} are driven not only by schema languages features, but also by related common practices.
+\autoref{tab:data-model-comparison} shows which main features are used in EXPRESS-driven and XSD-driven building data models, and how they are supported by OWL 2 profiles.
+
+% \blindtext
+% \thispagestyle{empty}
+% \begin{landscape}
+
+
+
+
+\begin{table*}[t]
+% \begin{sidewaystable}[t]
+\footnotesize
+    \centering
+    \caption{Data model comparison}
+    \label{tab:data-model-comparison}
+    
+    % \rowcolors{4}{lightgray}{}    
+
+    \begin{threeparttable}    
+        \begin{tabu} to \textwidth { X[0.5] X[0.6l] X[l] X[l] X[l] X[l] X[l] }            
+            \hline            
+                \multirow{2}{*}{\textbf{Features}}
+                & \multicolumn{2}{c|}{\textbf{Used in building data models}}
+                & \multicolumn{4}{c}{\textbf{Supported by OWL 2 profiles}}
+            \\    
+            \cline{2-7}            
+                & \multicolumn{1}{l}{\textbf{EXPRESS-}}
+                & \multirow{2}{*}{\textbf{XSD-driven}}
+                & \multirow{2}{*}{\textbf{OWL 2 EL}}
+                & \multirow{2}{*}{\textbf{OWL 2 QL}}
+                & \multirow{2}{*}{\textbf{OWL 2 RL}}
+                & \multirow{2}{*}{\textbf{OWL 2 DL}}
+            \\    
+                & \textbf{driven}    
+                &
+                &
+                &
+                &
+                &
+            \\    
+            \hline            
+            \hline
+                \multicolumn{7}{c}{\textbf{Primitive Types}}
+            \\
+            % \hline            
+                Decimals  % Feature  
+                
+                & \texttt{REAL}       % EXPRESS
+                
+                & \texttt{\textit{xs:decimal\tnotex{tn:rarely-used}}  \newline xs:double}      % XSD
+                
+                & \texttt{owl:real    \newline    owl:relational  \newline xsd:decimal}     % EL
+                
+                & \texttt{xsd:decimal \newline xsd:double}     % QL
+                
+                & \texttt{xsd:decimal \newline xsd:double}     % RL
+            
+                & \texttt{owl:real \newline owl:relational    \newline xsd:decimal \newline xsd:double}     % RL
+            \\
+            % \hline            
+                Integers    % Feature
+                
+                & \texttt{INTEGER}       % EXPRESS
+                
+                & \texttt{\textit{xs:int\tnotex{tn:rarely-used}} \newline xs:integer \newline xs:long \newline
+                \textit{xs:nonNegInt\tnotex{tn:xsd-nonNegInt}\tnotex{tn:rarely-used}}}  % XSD
+                
+                & \texttt{xsd:integer \newline xsd:nonNegInt\tnotex{tn:xsd-nonNegInt}}  % EL
+                
+                & \texttt{xsd:integer \newline xsd:nonNegInt\tnotex{tn:xsd-nonNegInt}}  % QL
+                
+                % & \texttt{xsd:int \newline xsd:integer \newline xsd:long \newline xsd:non\newline-Negative\newline-Integer}  % RL
+                & \texttt{xsd:int \newline xsd:integer \newline xsd:long \newline xsd:nonNegInt\tnotex{tn:xsd-nonNegInt}}  % RL
+                
+                & \texttt{xsd:int \newline xsd:integer \newline xsd:long \newline xsd:nonNegInt\tnotex{tn:xsd-nonNegInt}}  % DL
+            \\
+            % \hline            
+                Strings    % Feature
+                
+                & \texttt{STRING}       % EXPRESS
+                
+                & \texttt{\textit{xs:ID\tnotex{tn:rarely-used}  \newline xs:language\tnotex{tn:rarely-used}  \newline xs:NMTOKENS\tnotex{tn:rarely-used}}\newline
+                xs:normString\tnotex{tn:normString}  \newline    xs:string}      % XSD
+                
+                & \texttt{xsd:normString\tnotex{tn:normString}   \newline xsd:string}    % EL
+                
+                & \texttt{xsd:normString\tnotex{tn:normString}   \newline xsd:string}     % QL
+                
+                & \texttt{xsd:normString\tnotex{tn:normString}   \newline xsd:string}     % RL
+                
+                & \texttt{xsd:normString\tnotex{tn:normString}   \newline xsd:string}     % DL
+            \\
+            % \hline            
+                Booleans    % Feature
+                
+                & \texttt{BOOLEAN}       % EXPRESS
+                
+                & \texttt{xs:boolean}      % XSD
+                
+                & --\tnotex{no-built-in-support}    % EL
+                
+                & --\tnotex{no-built-in-support}     % QL
+                
+                & --\tnotex{no-built-in-support}     % RL
+                
+                & \texttt{xs:boolean}      % DL
+            \\
+            % \hline            
+                Logicals    % Feature
+                
+                & \texttt{LOGICAL}       % EXPRESS
+                
+                & as enumeration      % XSD
+                
+                & --\tnotex{no-built-in-support}    % EL
+                
+                & --\tnotex{no-built-in-support}     % QL
+                
+                & --\tnotex{no-built-in-support}     % RL
+                
+                & --\tnotex{no-built-in-support}      % DL
+            \\
+            % \hline            
+                Time \newline instances    % Feature
+                
+                & --\tnotex{no-built-in-support}       % EXPRESS
+                
+                & \texttt{xs:date \newline xs:dateTime \newline xs:time \newline xs:gYear}      % XSD
+                
+                & --\tnotex{no-built-in-support}    % EL
+                
+                & --\tnotex{no-built-in-support}     % QL
+                
+                & --\tnotex{no-built-in-support}     % RL
+                
+                & --\tnotex{no-built-in-support}      % DL
+            \\
+            % \hline            
+                Names \& IDs    % Feature
+                
+                & --\tnotex{no-built-in-support}       % EXPRESS
+                
+                & \texttt{xs:anyURI \newline xs:IDREF \newline xs:QName}      % XSD
+                
+                & \texttt{xs:anyURI}    % EL
+                
+                & \texttt{xs:anyURI}     % QL
+                
+                & \texttt{xs:anyURI}     % RL
+                
+                & \texttt{xs:anyURI}      % DL
+            \\
+            \hline
+        \end{tabu}
+        \begin{tablenotes}
+        %   \item\label{tn:xs-prefix} Types with prefixes \textit{xs:}
+          \item\label{tn:rarely-used} Rarely used.
+          \item\label{tn:a} Element declarations
+          \item\label{tn:xsd-nonNegInt} \texttt{nonNegativeInteger}
+          \item\label{tn:normString} \texttt{normalizedString}
+          \item\label{tn:logical} Three-value logical values
+          \item\label{no-built-in-support} No built-in support, requires special solutions
+        \end{tablenotes}
+    \end{threeparttable}    
+\end{table*}
+% \end{sidewaystable}
+
+% \end{landscape}
+
+
+
+
+
+% \subsection{Target criteria}
+
+% \textbf{Requirement to input data models}
+% ...
+
+
+% \textbf{Requirement to output data formats}
+% ...
+
+% \textbf{Conversion schema}
+
+
+
+
+% \subsection{Data models comparison}
+
+
+
+
+
+% % The analysis of the simple and well-defined data models, used in the AEC/FM industry and described in Section \ref{sec:state-of-the-art}, shows that in spite of their different nature, they have a lot of similarities.
+
+% In this subsection, the \emph{"pure"} data part of the \emph{simple} and \emph{well-defined} data models, used in the \emph{AEC/FM industry} and described in Section \ref{sec:state-of-the-art}, are compared to each other.
+% "Pure" data means the static and most important information content needed for data exchange in the industry.
+% Examples of "dirty" data are: worksheets and text styles in spreadsheet formats, derived attributes, functions and rules in the EXPRESS data schemas.
+% "Simple" data models do not contain complex elements, such as \texttt{mixed} elements in XSD (see subsection \ref{sec:xsd-based-data-models}), \texttt{BAG}-aggregation data types in EXPRESS (see subsection \ref{sec:express-based-data-models}) or \texttt{image} in relational databases.
+% "Well-defined" data models are designed by qualified researchers and engineers, using the latest computer science trends and data modeling best practices.
+% The data models used outside the industry are unpredictable, for instance, their entities may not contain unique keys for linking.
+% Therefore, data models, which are complicated, or "poorly" designed, or unused in the industry, are outside the scope of the research.
+% In general, all the mentioned restrictions help to ensure that the data models are \emph{predictable} and probably can be mapped to the dynamic data model, specified in Section 3.2.
+
+
+
+
+
+% In spite of different nature of the EXPRESS-based, the XSD-based, and the relational data models groups, these data models have two significant similarities:
+
+% \begin{enumerate}
+
+% \item
+% These data models can be mapped in a certain way to an \emph{object} model. All EXPRESS-based data models are object models by definition. Most of XSD schemas are designed on top of a conceptual model, which involves two basic relationships between different "concepts": \emph{inheritance} and \emph{association}.
+% The whole-part relationships (aggregations in UML), often used in XSD/XML, are special cases of associations.
+% These "concepts" are reflected in certain XSD elements and can be "restored" from the XSD to be classes.
+% In tabular or relational data, each table can be considered as a class, which has associations with other classes.
+
+% \item
+% Most of \emph{single data records} in datasets of these data models can be considered as entity instances.
+% Examples of single data records are: single lines in SPF, rows in tabular and relational data, or XSD-elements in XML.
+% However, 
+
+
+% \item
+% All primitive data types used in the data models are related to the following groups: strings, integers, decimals, logicals, binaries, and date-times.
+
+
+% Entity types are similar to classes in OOP.
+% Rows in SPF, CSV, spreadsheets and relational databases, or XSD-elements in XML are samples of single data records. 
+% Rows in SPF are instances of entity types by definition.
+% \end{enumerate}
+% First, \emph{most} (not all) of 
+% In case of tabular and relational data models, the table names can be used to define entity types.
+% Second, these classes have attributes, but no operations.
+% Like in EXPRESS or OWL, and unlike traditional OOP, each attribute may have multiple value.
+
+
+
+
+% Third, there are only two basic relationships between these classes, namely inheritance and association.
+% Each class has only one superclass. 
+
+
+% ... In the Sections ..., we analyse in details each group of data models, which parts of them can or cannot be converted into OWL and RDF.
+
+
+% % (4) each attribute 
+
+% % The main difference between such a class diagram and an object model in traditional object-oriented programming (OOP) languages is that it allows attributes to have multiple values, similarly to properties in OWL languages (see...).
+
+
+
+% % Firstly, all simple data types are related to one of the following groups: strings, integers, decimals, enumerations, calendar, and logical. 
+
+
+
+
+% % The specific features of the data schemas to be ignored, for instance, are: functions, derived attributes and rules in EXPRESS; ... in XSD; data about workbooks, worksheets, text style and so on in Spreadsheets.
+
+
+
+
+

@@ -1,0 +1,1158 @@
+\subsection{Semantic Web and Linked Data}
+
+
+In literature, Semantic Web, Linked Data, and Web of Data are often considered as synonyms.
+However, 
+
+
+\begin{table*}[t]
+% \begin{sidewaystable}[t]
+\footnotesize
+    \centering
+    \caption{OWL 2 profile features: Ontologies and general class declarations}
+    \label{tab:owl-2-profiles-general}
+    
+    % \rowcolors{4}{lightgray}{}    
+
+    \begin{threeparttable}    
+        \begin{tabu} to \textwidth { X[5l] X[10l] X[9l] X[c] X[c] X[c] X[c] }
+        
+            \hline                
+                \multicolumn{3}{c}{\textbf{Language feature}}
+                & \multicolumn{4}{|c}{\textbf{Supportness by OWL 2 profiles}}
+                % &
+                % \multicolumn{2}{c}{Can be validated with OWL 2 profiles}
+            \\
+            \hline                
+                \textbf{Name}
+                & \textbf{Functional syntax}
+                & \textbf{RDF syntax}
+                & \multicolumn{1}{|c}{\textbf{EL}}
+                & \textbf{QL}
+                & \textbf{RL}
+                & \textbf{DL}
+            \\
+            \hline
+            \endhead
+                \multicolumn{7}{c}{\textbf{Ontologies}}
+            \\
+                % Name
+                OWL ontology (importing)	
+                % Functional syntax
+                & Ontology([ON [U]] \newline Import(ON\sub{1}) \dots \newline $\;\;$
+  Annotation(A t) \dots \newline )		
+                % RDF syntax
+                & ON rdf:type owl:Ontology.\newline
+                [ON owl:versionIRI U.] \newline
+                ON owl:imports ON\sub{1}. \dots\newline
+                ON A t.\newline
+                \dots  
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                prefix declaration
+                % Functional syntax
+                & Prefix(p=U)	
+                % RDF syntax
+                & @prefix p U.  
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+            \hline
+                \multicolumn{7}{c}{\textbf{Declarations}}
+            \\
+                % Name
+                class	
+                % Functional syntax
+                & Declaration( Class( CN ) )		
+                % RDF syntax
+                & CN rdf:type owl:Class.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                datatype	
+                % Functional syntax
+                & Declaration( Datatype( DN ) )		
+                % RDF syntax
+                & DN rdf:type rdfs:Datatype.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                object property	
+                % Functional syntax
+                & Declaration( ObjectProperty( PN ) )		
+                % RDF syntax
+                & PN rdf:type owl:ObjectProperty.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                data property	
+                % Functional syntax
+                & Declaration( DataProperty( R ) )		
+                % RDF syntax
+                & R rdf:type owl:DatatypeProperty.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                annotation property		
+                % Functional syntax
+                & Declaration( AnnotationProperty( A ) )
+                % RDF syntax
+                & A rdf:type owl:AnnotationProperty.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                named individual	
+                % Functional syntax
+                & Declaration( NamedIndividual( aN ) )		
+                % RDF syntax
+                & aN rdf:type owl:NamedIndividual.
+
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+            \hline
+                \multicolumn{7}{c}{\textbf{Class expression axioms}}
+            \\
+                % Name
+                subclass 
+                % Functional syntax
+                & SubClassOf(C\sub{1} C\sub{2})
+                % RDF syntax
+                & C\sub{1} rdfs:subClassOf C\sub{2}.
+                % EL
+                & \yes
+                % QL
+                & \yes
+                % RL
+                & \yes
+                % DL
+                & \yes
+            \\
+                % Name
+                equivalent classes 
+                % Functional syntax
+                & EquivalentClasses(C\sub{1} \dots C\sub{n})	
+                % RDF syntax
+                & C\sub{j} owl:equivalentClass C\sub{j+1}. j=1\dots n-1
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                disjoint classes 
+                % Functional syntax
+                & DisjointClasses(C\sub{1} C\sub{2})
+                % RDF syntax
+                & C\sub{1} owl:disjointWith C\sub{2}.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & \yes
+            \\
+                % Name
+                pairwise disjoint classes
+                % Functional syntax
+                & DisjointClasses(C\sub{1} \dots C\sub{n})
+                % RDF syntax
+                & $\_$:x rdf:type owl:AllDisjointClasses.\newline
+                $\_$:x owl:members ( C\sub{1} \dots C\sub{n} ).
+                % EL
+                & \yes
+                % QL
+                & \yes
+                % RL
+                & \yes
+                % DL
+                & \yes
+            \\
+                % Name
+                disjoint union
+                % Functional syntax
+                & DisjointUnionOf(C\sub{N} C\sub{1} \dots C\sub{n})
+                % RDF syntax
+                & C\sub{N} owl:disjointUnionOf ( C\sub{1} \dots C\sub{n} ).
+                % EL
+                & \yes
+                % QL
+                & \yes
+                % RL
+                & \yes
+                % DL
+                & \yes
+            \\                
+            \hline
+                \multicolumn{7}{c}{\textbf{Boolean Connectives and Enumeration of Individuals}}
+            \\
+                % Name
+                intersection	
+                % Functional syntax
+                & ObjectIntersectionOf(C\sub{1} \dots C\sub{n})		
+                % RDF syntax
+                & $\_$:x rdf:type owl:Class.\newline
+                $\_$:x owl:intersectionOf ( C\sub{1} \dots C\sub{n} ).
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                union	
+                % Functional syntax
+                & ObjectUnionOf(C\sub{1} \dots C\sub{n})		
+                % RDF syntax
+                & $\_$:x rdf:type owl:Class.\newline
+                $\_$:x owl:unionOf ( C\sub{1} \dots C\sub{n} ).
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                complement	
+                % Functional syntax
+                & ObjectComplementOf(C\sub{1} \dots C\sub{n})		
+                % RDF syntax
+                & $\_$:x rdf:type owl:Class.\newline
+                $\_$:x owl:complementOf ( C\sub{1} \dots C\sub{n} ).
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                enumeration	
+                % Functional syntax
+                & ObjectOneOf(a\sub{1} \dots a\sub{n})		
+                % RDF syntax
+                & $\_$:x rdf:type owl:Class.\newline
+                $\_$:x owl:oneOf ( a\sub{1} \dots a\sub{n} ).
+                % EL
+                & \yesno\tnotex{tn:owl2-el-single-individual-or-literal-only}
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\                
+            \hline
+                \multicolumn{7}{c}{\textbf{Data range expressions}}
+            \\
+                % Name
+                named datatype
+                % Functional syntax
+                & DN
+                % RDF syntax
+                & DN
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                data range intersection	
+                % Functional syntax
+                & DataIntersectionOf(D\sub{1} \dots D\sub{n})		
+                % RDF syntax
+                & $\_$:x rdf:type rdfs:Datatype.\newline
+                $\_$:x owl:intersectionOf ( D\sub{1} \dots D\sub{n} ).
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                data range union	
+                % Functional syntax
+                & DataUnionOf(D\sub{1} \dots D\sub{n})		
+                % RDF syntax
+                & $\_$:x rdf:type rdfs:Datatype.\newline
+                $\_$:x owl:unionOf ( D\sub{1} \dots D\sub{n} ).
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                data range complement	
+                % Functional syntax
+                & DataComplementOf(D)		
+                % RDF syntax
+                & $\_$:x rdf:type rdfs:Datatype.\newline
+                $\_$:x owl:datatypeComplementOf D.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                literal enumeration	
+                % Functional syntax
+                & DataOneOf(v\sub{1} \dots v\sub{n})		
+                % RDF syntax
+                & $\_$:x rdf:type rdfs:Datatype.\newline
+                $\_$:x owl:oneOf ( v\sub{1} \dots v\sub{n} ).
+                % EL
+                & \yesno\tnotex{tn:owl2-el-single-individual-or-literal-only}
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                datatype restriction
+                % Functional syntax
+                & DatatypeRestriction(DN f\sub{1} v\sub{1} \dots f\sub{n} v\sub{n})
+                % RDF syntax
+                & $\_$:x rdf:type rdfs:Datatype.\newline
+                $\_$:x owl:onDatatype DN.\newline
+                $\_$:x owl:withRestrictions ($\_$:x\sub{1} ... $\_$:x\sub{n}).\newline
+                $\_$:x\sub{j} f\sub{j} v\sub{j}.      j=1\dots n
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\                
+            \hline
+                \multicolumn{7}{c}{\textbf{Keys}}
+            \\
+                % Name
+                Key	
+                % Functional syntax
+                & HasKey(C (P\sub{1} \dots P\sub{m}) (R\sub{1} \dots R\sub{n})) )	
+                % RDF syntax
+                & C owl:hasKey (P\sub{1} \dots P\sub{m} R\sub{1} \dots R\sub{n}). \newline m+n>0
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\                
+            \hline
+                \multicolumn{7}{c}{\textbf{Datatype definitions}}
+            \\
+                % Name
+                datatype definition	
+                % Functional syntax
+                & DatatypeDefinition(DN D)		
+                % RDF syntax
+                & DN owl:equivalentClass D.
+
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+            \hline
+                \multicolumn{7}{c}{\textbf{Object property axioms}}
+            \\
+                % Name
+                subproperty		
+                % Functional syntax
+                & SubObjectPropertyOf(P\sub{1} P\sub{2})
+                % RDF syntax
+                & P\sub{1} rdfs:subPropertyOf P\sub{2}.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                property domain
+                % Functional syntax
+                & ObjectPropertyDomain(P C)	
+                % RDF syntax
+                & P rdfs:domain C.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                property range		
+                % Functional syntax
+                & ObjectPropertyRange(P C)
+                % RDF syntax
+                & P rdfs:range C.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                inverse properties		
+                % Functional syntax
+                & InverseObjectProperties(P\sub{1} P\sub{2})
+                % RDF syntax
+                & P\sub{1} owl:inverseOf P\sub{2}.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                functional property	
+                % Functional syntax
+                & FunctionalObjectProperty(P)
+                % RDF syntax
+                & P rdf:type owl:FunctionalProperty.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+            \hline
+                \multicolumn{7}{c}{\textbf{Data property axioms}}
+            \\
+                % Name
+                subproperty			
+                % Functional syntax
+                & SubDataPropertyOf(R\sub{1} R\sub{2})
+                % RDF syntax
+                & R\sub{1} rdfs:subPropertyOf R\sub{2}.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                property domain	
+                % Functional syntax
+                & DataPropertyDomain(R C)		
+                % RDF syntax
+                & R rdfs:domain C.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                property range	
+                % Functional syntax
+                & DataPropertyRange(R D)		
+                % RDF syntax
+                & R rdfs:range D.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                functional property	
+                % Functional syntax
+                & FunctionalDataProperty(R)	
+                % RDF syntax
+                & R rdf:type owl:FunctionalProperty.	
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                &
+            \\
+            \hline
+        \end{tabu}
+        \begin{tablenotes}
+            \item\label{tn:owl2-el-single-individual-or-literal-only} Only a single individual or a single literal.
+        \end{tablenotes}
+    \end{threeparttable}    
+\end{table*}
+        
+        
+        
+\begin{table*}[t]
+% \begin{sidewaystable}[t]
+\footnotesize
+    \centering
+    \caption{OWL 2 profile features: Ontologies and general class declarations}
+    \label{tab:owl-2-profiles-object-properties}
+    
+    % \rowcolors{4}{lightgray}{}    
+
+    \begin{threeparttable}    
+        \begin{tabu} to \textwidth { X[5l] X[10l] X[9l] X[c] X[c] X[c] X[c] }
+            \hline
+                \multicolumn{7}{c}{\textbf{Object property restrictions}}
+            \\
+                % Name
+                universal	
+                % Functional syntax
+                & 	ObjectAllValuesFrom(P C)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:allValuesFrom C.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                existential	
+                % Functional syntax
+                & 	ObjectSomeValuesFrom(P C)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:someValuesFrom C.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                individual value	
+                % Functional syntax
+                & 	ObjectHasValue(P a)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:hasValue a.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                exact cardinality
+                % Functional syntax
+                & ObjectExactCardinality(n P)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:cardinality n.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                maximum cardinality
+                % Functional syntax
+                & ObjectMaxCardinality(n P)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:maxCardinality n.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                minimum cardinality
+                % Functional syntax
+                & ObjectMinCardinality(n P)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:minCardinality n.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                qualified exact cardinality
+                % Functional syntax
+                & ObjectExactCardinality(n P C)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:cardinality n.\newline
+                $\_$:x owl:onClass C.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                qualified maximum cardinality
+                % Functional syntax
+                & ObjectMaxCardinality(n P C)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:maxCardinality n.\newline
+                $\_$:x owl:onClass C.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                qualified minimum cardinality
+                % Functional syntax
+                & ObjectMinCardinality(n P C)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:minCardinality n.\newline
+                $\_$:x owl:onClass C.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\                
+            \hline
+                \multicolumn{7}{c}{\textbf{Data property restrictions}}
+            \\
+                % Name
+                universal	
+                % Functional syntax
+                & 	DataAllValuesFrom(R D)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:allValuesFrom D.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                existential	
+                % Functional syntax
+                & 	DataSomeValuesFrom(R D)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:someValuesFrom D.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                individual value	
+                % Functional syntax
+                & 	DataHasValue(R v)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:hasValue v.
+                % EL
+                & \yes
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                exact cardinality
+                % Functional syntax
+                & DataExactCardinality(n R)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:cardinality n.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                maximum cardinality
+                % Functional syntax
+                & DataMaxCardinality(n R)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:maxCardinality n.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                minimum cardinality
+                % Functional syntax
+                & DataMinCardinality(n R)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:minCardinality n.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                qualified exact cardinality
+                % Functional syntax
+                & DataExactCardinality(n R D)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:cardinality n.\newline
+                $\_$:x owl:onClass D.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                qualified maximum cardinality
+                % Functional syntax
+                & ObjectMaxCardinality(n R D)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty R.\newline
+                $\_$:x owl:maxCardinality n.\newline
+                $\_$:x owl:onClass D.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                qualified minimum cardinality
+                % Functional syntax
+                & ObjectMinCardinality(n P C)	
+                % RDF syntax
+                & $\_$:x rdf:type owl:Restriction.\newline
+                $\_$:x owl:onProperty P.\newline
+                $\_$:x owl:minCardinality n.\newline
+                $\_$:x owl:onClass C.
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\                
+            \hline
+                \multicolumn{7}{c}{\textbf{}}
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+                % Name
+                	
+                % Functional syntax
+                & 
+                % RDF syntax
+                & 
+                % EL
+                & 
+                % QL
+                & 
+                % RL
+                & 
+                % DL
+                & 
+            \\
+            \hline
+            
+
+        \end{tabu}
+        % \begin{tablenotes}
+        %     \item
+        % \end{tablenotes}
+    \end{threeparttable}    
+\end{table*}
+
+
+
+
+		
+		
